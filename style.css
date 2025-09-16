@@ -1,0 +1,22 @@
+html,
+body,
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 100%;
+}
+
+.parent {
+  font-size: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.child {
+  width: 28%;
+}
+
+.child-1 {
+  border: 3px solid;
+}
