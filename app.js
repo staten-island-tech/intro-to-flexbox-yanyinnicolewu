@@ -99,63 +99,74 @@ const dogs = [
     name: "Bulldog",
     price: 2750,
     inStock: true,
-    img: "",
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Bulldog_inglese.jpg/1200px-Bulldog_inglese.jpg",
     alt: "The Bulldog is a British breed of dog of mastiff type. It may also be known as the English Bulldog or British Bulldog. It is a stocky, muscular dog of medium size, with a large head, thick folds of skin around the face and shoulders and a relatively flat face with a protruding lower jaw.",
   },
 
-   {
+  {
     name: "Chihuahua",
     price: 1750,
     inStock: true,
-    img: "",
+    img: "https://cdn.britannica.com/44/233244-050-A65D4571/Chihuahua-dog.jpg",
     alt: "The Chihuahua is a Mexican breed of toy dog. It is named for the Mexican state of Chihuahua and is one of the smallest dog breeds in the world. It is usually kept as a companion animal.",
   },
 
-   {
+  {
     name: "Great Dane",
     price: 1500,
     inStock: true,
-    img: "",
+    img: "https://www.zooplus.ie/magazine/wp-content/uploads/2018/11/Great-Dane-768x512.webp",
     alt: "The Great Dane is a German breed of large mastiff-sighthound, which descends from hunting dogs of the Middle Ages used to hunt bears, wild boar, and deer. They were also used as guardian dogs of German nobility. It is one of the two largest dog breeds in the world, along with the Irish Wolfhound.",
   },
 
-   {
+  {
     name: "Havanese",
     price: 3250,
     inStock: true,
-    img: "",
+    img: "https://apupabove.com/cdn/shop/articles/Havanese.webp?v=1742407835&width=1600",
     alt: "The Havanese, a bichon-type dog, is the national dog of Cuba, developed from the now extinct Blanquito de la Habana. The Blanquito descended from the also now-extinct Bichón Tenerife.",
   },
 
-   {
+  {
     name: "Brittany",
     price: 2000,
     inStock: true,
-    img: "",
+    img: "https://cdn-fastly.petguide.com/media/2022/02/28/8263516/brittany.jpg?size=720x845&nocrop=1",
     alt: "The Brittany Spaniel or Breton Spaniel is a French breed of gun dog of spaniel type, bred primarily for bird hunting. It developed between the seventeenth and nineteenth centuries in Brittany in north-west France, and was officially recognized early in the twentieth.",
   },
 
-   {
-    name: "",
-    price: ,
+  {
+    name: "Poodle",
+    price: 1900,
     inStock: true,
-    img: "",
-    alt: "",
+    img: "https://www.dogster.com/wp-content/uploads/2023/08/red-toy-poodle-in-the-park_Mykhaylo_Kozelko_Shutterstock.jpg",
+    alt: "The Poodle, called the Pudel in German and the Caniche in French, is a breed of water dog. The breed is divided into four varieties based on size, the Standard Poodle, Medium Poodle, Miniature Poodle and Toy Poodle, although the Medium Poodle is not universally recognised.",
   },
 
-   {
-    name: "",
-    price: ,
+  {
+    name: "Boxer",
+    price: 2150,
     inStock: true,
-    img: "",
-    alt: "",
+    img: "https://www.thesprucepets.com/thmb/YwjpUBfdG8mkz2L64CX4-mA8cko=/1539x0/filters:no_upscale():strip_icc()/boxer-dog-breed-1117944-hero-dfe9f67a59ce4ab19ebd274c06b28ad1.jpg",
+    alt: "The Boxer is a medium to large, short-haired dog breed of mastiff-type, developed in Germany. The coat is smooth and tight-fitting; colors are fawn or brindled, with or without white markings.",
   },
 
-   {
-    name: "",
-    price: ,
+  {
+    name: "Pug",
+    price: 1400,
     inStock: true,
-    img: "",
-    alt: "",
+    img: "https://cdn.britannica.com/34/233234-050-1649BFA9/Pug-dog.jpg?w=400&h=300&c=crop",
+    alt: "The Pug is a breed of dog with the physically distinctive features of a wrinkly, short-muzzled face, and curled tail.",
   },
 ];
+
+function inject(item) {
+  let name = "Roman";
+  const container = document.querySelector(".name");
+  container.insertAdjacentHTML("afterbegin");
+}
+
+inject(product[0]);
+inject(product[0]);
+inject(product[0]);
+inject(product[0]);
