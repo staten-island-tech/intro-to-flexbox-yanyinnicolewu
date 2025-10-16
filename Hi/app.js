@@ -161,12 +161,16 @@ const dogs = [
 ];
 
 function inject(item) {
-  let name = "Dog sale";
   const container = document.querySelector(".container");
-  container.insertAdjacentHTML("afterbegin", `<h1>${name}</h1>`);
+  const html = `
+    <div class="card">
+      <img src = "${item.image}">
+      <h2>${item.name}</h2>
+      <p>${item.alt}</p>
+      <p>Price: $${item.price}</p>
+    </div>
+  `;
+  container.insertAdjacentHTML("afterbegin", html);
 }
 
-inject(product[0]);
-inject(product[0]);
-inject(product[0]);
-inject(product[0]);
+dogs.forEach((item) => inject(item));
