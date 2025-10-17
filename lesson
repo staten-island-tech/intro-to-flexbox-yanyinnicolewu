@@ -1,6 +1,6 @@
 # 🎵 Lesson: DOM Manipulation in JavaScript
 
-*Building an Album Collection App*
+_Building an Album Collection App_
 
 ---
 
@@ -8,13 +8,13 @@
 
 The **DOM (Document Object Model)** is like a **map of your webpage** that JavaScript can read and change.
 
-* HTML builds the *structure* (like LEGO bricks).
-* CSS paints them and adds style (like LEGO colors & stickers).
-* The DOM is like a **blueprint** that JavaScript can look at and say:
+- HTML builds the _structure_ (like LEGO bricks).
+- CSS paints them and adds style (like LEGO colors & stickers).
+- The DOM is like a **blueprint** that JavaScript can look at and say:
 
-  * “Add another brick here.”
-  * “Take that brick away.”
-  * “Paint this brick red.”
+  - “Add another brick here.”
+  - “Take that brick away.”
+  - “Paint this brick red.”
 
 ---
 
@@ -36,10 +36,10 @@ const DOMSelectors = {
 
 Here’s what’s happening:
 
-* `document.getElementById("title")` → points to the album name input box.
-* `document.getElementById("artist")` → points to the artist input box.
-* `document.getElementById("url")` → points to the image URL input box.
-* `document.getElementById("display")` → points to the empty display section where albums will go.
+- `document.getElementById("title")` → points to the album name input box.
+- `document.getElementById("artist")` → points to the artist input box.
+- `document.getElementById("url")` → points to the image URL input box.
+- `document.getElementById("display")` → points to the empty display section where albums will go.
 
 📌 **Analogy**: Imagine the page is a big school library. `getElementById` is like asking the librarian:
 
@@ -49,7 +49,7 @@ Here’s what’s happening:
 ### Other selectors you might use:
 
 ```js
-document.querySelector(".btn");  // selects first element with class "btn"
+document.querySelector(".btn"); // selects first element with class "btn"
 document.querySelectorAll(".btn"); // selects ALL buttons with class "btn"
 ```
 
@@ -63,9 +63,9 @@ An **event listener** is like telling your page:
 
 Some common events:
 
-* `click` → when a button is clicked
-* `submit` → when a form is submitted
-* `mouseover` → when you hover your mouse
+- `click` → when a button is clicked
+- `submit` → when a form is submitted
+- `mouseover` → when you hover your mouse
 
 ### Example from our code:
 
@@ -75,7 +75,7 @@ document.getElementById("form").addEventListener("submit", function (e) {
   let album = {
     title: document.getElementById("title").value,
     artist: document.getElementById("artist").value,
-    url: document.getElementById("url").value
+    url: document.getElementById("url").value,
   };
   inject(album); // add to the page
   clearFields(); // reset form inputs
@@ -91,7 +91,7 @@ Step by step:
 5. **Clear** the form fields for the next entry.
 
 📌 **Analogy**: Think of it like pressing the “Play” button on a music player.
-The button doesn’t play music by itself — you need to tell it, *“When pressed, play this song.”*
+The button doesn’t play music by itself — you need to tell it, _“When pressed, play this song.”_
 
 ---
 
@@ -117,15 +117,15 @@ function inject(album) {
 
 ### What’s happening:
 
-* `insertAdjacentHTML("afterbegin", "...")` means:
+- `insertAdjacentHTML("afterbegin", "...")` means:
 
   > “Take this HTML and stick it at the **top** of the display section.”
 
-* The **template string** (with backticks `` ` ``) lets us insert variables:
+- The **template string** (with backticks `` ` ``) lets us insert variables:
 
-  * `${album.url}` → puts in the picture.
-  * `${album.artist}` → puts in the artist’s name.
-  * `${album.title}` → puts in the album name.
+  - `${album.url}` → puts in the picture.
+  - `${album.artist}` → puts in the artist’s name.
+  - `${album.title}` → puts in the album name.
 
 📌 **Analogy**: Think of the `display` section as your **scrapbook**.
 Every time you inject, you’re gluing a new photo and caption into it.
@@ -142,9 +142,9 @@ function removeAlbum(event) {
 }
 ```
 
-* `event.target` is the button that got clicked.
-* `.parentElement` is the card that holds the button.
-* `.remove()` deletes that whole card.
+- `event.target` is the button that got clicked.
+- `.parentElement` is the card that holds the button.
+- `.remove()` deletes that whole card.
 
 📌 **Analogy**: Like pulling a sticky note off your fridge — gone instantly.
 
@@ -177,7 +177,7 @@ document.body.appendChild(newP);
 ### Example C: Button that changes text
 
 ```js
-document.querySelector(".btn").addEventListener("click", function() {
+document.querySelector(".btn").addEventListener("click", function () {
   document.querySelector("h1").textContent = "You clicked the button!";
 });
 ```
@@ -186,10 +186,10 @@ document.querySelector(".btn").addEventListener("click", function() {
 
 ## 7. Wrap-Up
 
-* **Selecting elements** = pointing at things on the page.
-* **Event listeners** = telling the page what to do when something happens.
-* **Injecting HTML** = gluing new content into your scrapbook (the DOM).
-* **Removing** = tearing a card out.
+- **Selecting elements** = pointing at things on the page.
+- **Event listeners** = telling the page what to do when something happens.
+- **Injecting HTML** = gluing new content into your scrapbook (the DOM).
+- **Removing** = tearing a card out.
 
 Together, these let us **make webpages interactive** 🎉.
 
