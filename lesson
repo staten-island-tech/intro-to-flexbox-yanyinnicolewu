@@ -1,196 +1,240 @@
-# 🎵 Lesson: DOM Manipulation in JavaScript
-
-_Building an Album Collection App_
+# 🎨 Lesson: Flexbox Layout with Cards
 
 ---
 
-## 1. What is the DOM?
+✨ Quick Analogy:
+Think of Flexbox like a group photo.
 
-The **DOM (Document Object Model)** is like a **map of your webpage** that JavaScript can read and change.
-
-- HTML builds the _structure_ (like LEGO bricks).
-- CSS paints them and adds style (like LEGO colors & stickers).
-- The DOM is like a **blueprint** that JavaScript can look at and say:
-
-  - “Add another brick here.”
-  - “Take that brick away.”
-  - “Paint this brick red.”
+- `justify-content` is how people spread left-to-right.
+- `align-items` is whether they’re standing tall or crouching.
+- `flex-wrap` is whether you make another row if too many people show up!
 
 ---
 
-## 2. Selecting Elements in JavaScript
+## 🧩 Flexbox Basics
 
-To change something on the page, we first have to **find it**.
-Think of it like pointing to a book on a shelf before you can read or replace it.
+### 1. Normal Block Layout (no Flexbox)
 
-### Example from our code:
+By default, `div`s stack vertically:
 
-```js
-const DOMSelectors = {
-  title: document.getElementById("title"),
-  artist: document.getElementById("artist"),
-  url: document.getElementById("url"),
-  display: document.getElementById("display"),
-};
 ```
-
-Here’s what’s happening:
-
-- `document.getElementById("title")` → points to the album name input box.
-- `document.getElementById("artist")` → points to the artist input box.
-- `document.getElementById("url")` → points to the image URL input box.
-- `document.getElementById("display")` → points to the empty display section where albums will go.
-
-📌 **Analogy**: Imagine the page is a big school library. `getElementById` is like asking the librarian:
-
-> “Where is the book with ID ‘title’?”
-> The librarian points right to it.
-
-### Other selectors you might use:
-
-```js
-document.querySelector(".btn"); // selects first element with class "btn"
-document.querySelectorAll(".btn"); // selects ALL buttons with class "btn"
+[ Card 1 ]
+[ Card 2 ]
+[ Card 3 ]
+[ Card 4 ]
 ```
 
 ---
 
-## 3. Event Listeners
+### 2. Flexbox Row Layout
 
-An **event listener** is like telling your page:
+With `display: flex;`, the cards sit side by side:
 
-> “When something happens, do this!”
-
-Some common events:
-
-- `click` → when a button is clicked
-- `submit` → when a form is submitted
-- `mouseover` → when you hover your mouse
-
-### Example from our code:
-
-```js
-document.getElementById("form").addEventListener("submit", function (e) {
-  e.preventDefault(); // stops page from refreshing
-  let album = {
-    title: document.getElementById("title").value,
-    artist: document.getElementById("artist").value,
-    url: document.getElementById("url").value,
-  };
-  inject(album); // add to the page
-  clearFields(); // reset form inputs
-});
 ```
-
-Step by step:
-
-1. **Listen** to the form for a “submit” event.
-2. **Stop** the browser’s default behavior (`e.preventDefault()`) — normally a form reloads the page.
-3. **Grab** the values typed in by the user.
-4. **Send** them to our `inject` function to create a new album card.
-5. **Clear** the form fields for the next entry.
-
-📌 **Analogy**: Think of it like pressing the “Play” button on a music player.
-The button doesn’t play music by itself — you need to tell it, _“When pressed, play this song.”_
+[ Card 1 ] [ Card 2 ] [ Card 3 ] [ Card 4 ]
+```
 
 ---
 
-## 4. Injecting into the DOM
+### 3. Wrapping (flex-wrap: wrap)
 
-This is where the magic happens — **we add new HTML elements with JavaScript**.
+If the screen is too narrow, cards move to the next row:
 
-### Our function:
+```
+[ Card 1 ] [ Card 2 ]
+[ Card 3 ] [ Card 4 ]
+```
 
-```js
-function inject(album) {
-  DOMSelectors.display.insertAdjacentHTML(
-    "afterbegin",
-    `<div class="display-card">
-      <img class="display-img" src="${album.url}"/>
-      <h2 class="display-artist">${album.artist}</h2>
-      <h3 class="display-album">${album.title}</h3>
-      <button class="remove btn">Remove Album</button>
-    </div>`
-  );
+---
+
+## 🔄 Changing `.card` Width
+
+### Current Setting → `width: 22%`
+
+4 cards fit in a row:
+
+```
+[ Card 1 ] [ Card 2 ] [ Card 3 ] [ Card 4 ]
+```
+
+---
+
+### If You Change to `width: 30%`
+
+Now only 3 cards fit per row:
+
+```
+[ Card 1 ] [ Card 2 ] [ Card 3 ]
+[ Card 4 ]
+```
+
+---
+
+### If You Change to `width: 45%`
+
+Now only 2 cards fit per row:
+
+```
+[ Card 1 ] [ Card 2 ]
+[ Card 3 ] [ Card 4 ]
+```
+
+---
+
+### If You Change to `width: 100%`
+
+Each card takes a full row (like a list):
+
+```
+[ Card 1 ]
+[ Card 2 ]
+[ Card 3 ]
+[ Card 4 ]
+```
+
+---
+
+## 🏗️ The HTML Structure
+
+In your `index.html` file, the main part is:
+
+```html
+<div class="container">
+  <div class="card">
+    <h2 class="card-header">Cool Card</h2>
+    <img class="card-img" src="img/candy2.jpg" alt="candy" />
+    <h3 class="card-price">$3.99</h3>
+  </div>
+  <!-- More cards... -->
+</div>
+```
+
+- **`<div class="container">`**
+  This is like a big box that holds all the smaller boxes (the cards).
+
+- **`<div class="card">`**
+  Each card is one product. It has:
+
+  - A title (`h2.card-header`)
+  - A picture (`img.card-img`)
+  - A price (`h3.card-price`)
+
+👉 This structure makes it easy to repeat cards without writing new layout code.
+
+---
+
+## 🎨 The CSS Styles
+
+### 1. Reset and Setup
+
+```css
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
 }
 ```
 
-### What’s happening:
-
-- `insertAdjacentHTML("afterbegin", "...")` means:
-
-  > “Take this HTML and stick it at the **top** of the display section.”
-
-- The **template string** (with backticks `` ` ``) lets us insert variables:
-
-  - `${album.url}` → puts in the picture.
-  - `${album.artist}` → puts in the artist’s name.
-  - `${album.title}` → puts in the album name.
-
-📌 **Analogy**: Think of the `display` section as your **scrapbook**.
-Every time you inject, you’re gluing a new photo and caption into it.
+This makes sure every element behaves consistently across browsers.
 
 ---
 
-## 5. Removing Items
+### 2. Flexbox Basics 🧩
 
-We also have a remove button:
+When you add this to a parent element:
 
-```js
-function removeAlbum(event) {
-  event.target.parentElement.remove();
+```css
+display: flex;
+```
+
+…it changes how the children are arranged:
+
+- By default, children line up **in a row** (instead of stacking top-to-bottom).
+- You can control spacing, alignment, and wrapping with a few special properties.
+
+The most common Flexbox tools are:
+
+- **`justify-content`** → controls left-to-right spacing
+- **`align-items`** → controls up-and-down alignment
+- **`flex-wrap`** → decides if items move to the next line when they don’t fit
+
+---
+
+### 3. The Container
+
+```css
+.container {
+  width: 90vw;
+  margin: 2rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 ```
 
-- `event.target` is the button that got clicked.
-- `.parentElement` is the card that holds the button.
-- `.remove()` deletes that whole card.
-
-📌 **Analogy**: Like pulling a sticky note off your fridge — gone instantly.
+- **`display: flex;`** → turns it into a flexbox.
+- **`flex-wrap: wrap;`** → lets cards move to the next line if needed.
+- **`justify-content: space-between;`** → spreads out the cards evenly across each row.
 
 ---
 
-## 6. Extra Examples
+### 4. The Cards
 
-### Example A: Change the background
+```css
+.card {
+  width: 22%;
+  height: 40rem;
+  margin: 3rem 0;
+  border: 2px solid black;
+  border-radius: 10px;
 
-```js
-document.querySelector("h1").style.color = "blue";
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
 ```
 
-👉 This changes the first `<h1>` text color to blue.
+Inside each card:
+
+- **`width: 22%`** → each card is about 1/4 of the container width (so 4 fit per row).
+- **`border-radius: 10px;`** → soft rounded corners.
+- **`display: flex; flex-direction: column;`** → inside the card, elements are stacked vertically.
+- **`align-items: center;`** → centers content horizontally.
+- **`justify-content: space-around;`** → spreads content vertically.
 
 ---
 
-### Example B: Add a new paragraph
+## 🧩 Block Element Modifier (BEM)
 
-```js
-const newP = document.createElement("p");
-newP.textContent = "This is a new paragraph!";
-document.body.appendChild(newP);
+The class names follow **BEM style**:
+
+- **Block:** `card` = the main component
+- **Element:** `card-header`, `card-img`, `card-price` = parts of the block
+
+This naming system keeps CSS organized and easier to read.
+
+---
+
+## 🔄 What Happens if You Change `.card` Width?
+
+Right now:
+
+```css
+.card {
+  width: 22%;
+}
 ```
 
-👉 Creates a new `<p>` tag and sticks it at the end of the body.
+- Fits **4 cards per row**.
 
----
+If you change it to:
 
-### Example C: Button that changes text
+- **`45%`** → only 2 cards fit per row.
+- **`30%`** → 3 cards fit per row.
+- **`100%`** → each card takes the whole row (like a stacked list).
 
-```js
-document.querySelector(".btn").addEventListener("click", function () {
-  document.querySelector("h1").textContent = "You clicked the button!";
-});
-```
-
----
-
-## 7. Wrap-Up
-
-- **Selecting elements** = pointing at things on the page.
-- **Event listeners** = telling the page what to do when something happens.
-- **Injecting HTML** = gluing new content into your scrapbook (the DOM).
-- **Removing** = tearing a card out.
-
-Together, these let us **make webpages interactive** 🎉.
+👉 Flexbox automatically rearranges the layout depending on space.
 
 ---

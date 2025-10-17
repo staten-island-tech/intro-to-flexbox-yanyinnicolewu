@@ -164,7 +164,7 @@ function inject(item) {
   const container = document.querySelector(".container");
   const html = `
     <div class="card">
-      <img src = "${item.image}">
+      <img src = "${item.img}">
       <h2>${item.name}</h2>
       <p>${item.alt}</p>
       <p>Price: $${item.price}</p>
