@@ -168,6 +168,7 @@ function inject(item) {
       <h2>${item.name}</h2>
       <p>${item.alt}</p>
       <p>Price: $${item.price}</p>
+      <button class="add-btn">Add to Cart</button>
     </div>
   `;
   container.insertAdjacentHTML("afterbegin", html);
