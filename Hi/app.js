@@ -175,7 +175,7 @@ function inject(item) {
       <button class="add-btn">Add to Cart</button>
     </div>
   `;
-  container.insertAdjacentHTML("beforeend", html);
+  container.insertAdjacentHTML("afterbegin", html);
 }
 
 function displayDogs(filter = "all") {
@@ -183,10 +183,10 @@ function displayDogs(filter = "all") {
 
   let filtered;
   if (filter === "all") filtered = dogs;
-  else if (filter === "under2000")
-    filtered = dogs.filter((d) => d.price < 2000);
-  else if (filter === "2000to2500")
-    filtered = dogs.filter((d) => d.price >= 2000 && d.price <= 2500);
+  else if (filter === "under1500")
+    filtered = dogs.filter((d) => d.price < 1500);
+  else if (filter === "1500to2500")
+    filtered = dogs.filter((d) => d.price >= 1500 && d.price <= 2500);
   else if (filter === "over2500") filtered = dogs.filter((d) => d.price > 2500);
 
   filtered.forEach((d) => inject(d));
@@ -201,21 +201,27 @@ function attachAddToCart() {
       const name = card.getAttribute("data-name");
       const price = parseInt(card.getAttribute("data-price"));
       cart.push({ name, price });
-      updateCartTotal();
+      updateCartDisplay();
     });
   });
 }
 
-function updateCartTotal() {
+function updateCartDisplay() {
   const total = cart.reduce((sum, item) => sum + item.price, 0);
-  cartTotalDiv.textContent = `Total: $${total}`;
+  const itemsList = cart
+    .map((item) => `<li>${item.name} - $${item.price}</li>`)
+    .join("");
+  cartTotalDiv.innerHTML = `
+    <strong>Cart Total: $${total}</strong>
+    <ol>${itemsList}</ol>
+  `;
 }
 
 function createFilterButtons() {
   const priceFilters = [
     { name: "All", value: "all" },
-    { name: "Under $2000", value: "under2000" },
-    { name: "$2000 - $2500", value: "2000to2500" },
+    { name: "Under $1500", value: "under1500" },
+    { name: "$1500 - $2500", value: "1500to2500" },
     { name: "Over $2500", value: "over2500" },
   ];
 
@@ -229,4 +235,4 @@ function createFilterButtons() {
 
 createFilterButtons();
 displayDogs();
-updateCartTotal();
+updateCartDisplay();
