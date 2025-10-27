@@ -183,10 +183,10 @@ function displayDogs(filter = "all") {
 
   let filtered;
   if (filter === "all") filtered = dogs;
-  else if (filter === "under1500")
-    filtered = dogs.filter((d) => d.price < 1500);
-  else if (filter === "1500to2500")
-    filtered = dogs.filter((d) => d.price >= 1500 && d.price <= 2500);
+  else if (filter === "under2000")
+    filtered = dogs.filter((d) => d.price < 2000);
+  else if (filter === "2000to2500")
+    filtered = dogs.filter((d) => d.price >= 2000 && d.price <= 2500);
   else if (filter === "over2500") filtered = dogs.filter((d) => d.price > 2500);
 
   filtered.forEach((d) => inject(d));
@@ -220,8 +220,8 @@ function updateCartDisplay() {
 function createFilterButtons() {
   const priceFilters = [
     { name: "All", value: "all" },
-    { name: "Under $1500", value: "under1500" },
-    { name: "$1500 - $2500", value: "1500to2500" },
+    { name: "Under $2000", value: "under2000" },
+    { name: "$2000 - $2500", value: "2000to2500" },
     { name: "Over $2500", value: "over2500" },
   ];
 
