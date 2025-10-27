@@ -1,16 +1,29 @@
-* {
-  font-family: "Times New Roman", Times, serif;
-}
-
 body {
+  font-family: "Times New Roman", Times, serif;
   background-color: antiquewhite;
+  text-align: center;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 40px;
+  margin: 40px 50px;
   font-size: 3rem;
   color: black;
+}
+
+.filters {
+  margin-bottom: 40px;
+}
+
+.filters button:hover {
+  background-color: grey;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
 .card {
@@ -21,19 +34,41 @@ h1 {
   text-align: center;
 }
 
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
 .card-img {
-  width: 100%;
-  border-radius: 8px;
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  padding: 20px;
+.card-price {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #000;
 }
 
-.button {
-  text-align: center;
+.add-btn {
+  background-color: #eace60;
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.add-btn:hover {
+  background-color: #ef9e25;
+}
+
+.cart-total {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin: 20px;
 }
