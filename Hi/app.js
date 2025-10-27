@@ -160,11 +160,6 @@ const dogs = [
   },
 ];
 
-const container = document.querySelector(".container");
-const filtersDiv = document.querySelector(".filters");
-const cartTotalDiv = document.querySelector(".cart-total");
-let cart = [];
-
 function inject(item) {
   const html = `
     <div class="card" data-name="${item.name}" data-price="${item.price}">
@@ -178,44 +173,20 @@ function inject(item) {
   container.insertAdjacentHTML("afterbegin", html);
 }
 
-function displayDogs(filter = "all") {
-  container.innerHTML = "";
-
-  let filtered;
-  if (filter === "all") filtered = dogs;
-  else if (filter === "under2000")
-    filtered = dogs.filter((d) => d.price < 2000);
-  else if (filter === "2000to2500")
-    filtered = dogs.filter((d) => d.price >= 2000 && d.price <= 2500);
-  else if (filter === "over2500") filtered = dogs.filter((d) => d.price > 2500);
-
-  filtered.forEach((d) => inject(d));
-  attachAddToCart();
-}
-
-function attachAddToCart() {
+function addToCart() {
   const buttons = document.querySelectorAll(".add-btn");
-  buttons.forEach((btn) => {
-    btn.addEventListener("click", (event) => {
-      const card = event.target.closest(".card");
-      const name = card.getAttribute("data-name");
-      const price = parseInt(card.getAttribute("data-price"));
-      cart.push({ name, price });
-      updateCartDisplay();
-    });
-  });
+  const btnArray = Array.from(buttons);
+  btnArray.forEach((btn) =>
+    btn.addEventListener("click", function (event) {
+      console.log(event, target, textContent);
+      console.log(
+        event.target.closest(".card").getAttribute("data-name"),
+        event.target.closest(".card").getAttribute("data-price")
+      );
+    })
+  );
 }
-
-function updateCartDisplay() {
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
-  const itemsList = cart
-    .map((item) => `<li>${item.name} - $${item.price}</li>`)
-    .join("");
-  cartTotalDiv.innerHTML = `
-    <strong>Cart Total: $${total}</strong>
-    <ol>${itemsList}</ol>
-  `;
-}
+addToCart();
 
 function createFilterButtons() {
   const priceFilters = [
@@ -224,15 +195,4 @@ function createFilterButtons() {
     { name: "$2000 - $2500", value: "2000to2500" },
     { name: "Over $2500", value: "over2500" },
   ];
-
-  priceFilters.forEach((filter) => {
-    const btn = document.createElement("button");
-    btn.textContent = filter.name;
-    btn.addEventListener("click", () => displayDogs(filter.value));
-    filtersDiv.appendChild(btn);
-  });
 }
-
-createFilterButtons();
-displayDogs();
-updateCartDisplay();
