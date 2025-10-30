@@ -172,6 +172,7 @@ function inject(item) {
   `;
   container.insertAdjacentHTML("afterbegin", html);
 }
+dogs.forEach((item)) => 
 
 function addToCart() {
   const buttons = document.querySelectorAll(".add-btn");
@@ -188,11 +189,7 @@ function addToCart() {
 }
 addToCart();
 
-function createFilterButtons() {
-  const priceFilters = [
-    { name: "All", value: "all" },
-    { name: "Under $2000", value: "under2000" },
-    { name: "$2000 - $2500", value: "2000to2500" },
-    { name: "Over $2500", value: "over2500" },
-  ];
+
+function removeAlbum(event) {
+  event.target.parentElement.remove();
 }
