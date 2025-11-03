@@ -11,12 +11,17 @@ h1 {
   color: black;
 }
 
-.filters {
-  margin-bottom: 40px;
+h3{
+  text-align: center;
+  font-size: 50px;
 }
 
-.filters button:hover {
-  background-color: grey;
+.filter button {
+  margin-bottom: 50px;
+}
+
+.filter button:hover {
+  background-color: lightgray;
 }
 
 .container {
@@ -34,11 +39,6 @@ h1 {
   text-align: center;
 }
 
-.card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-}
-
 .card-img {
   width: 200px;
   height: 150px;
@@ -52,7 +52,7 @@ h1 {
   color: #000;
 }
 
-.add-btn {
+.add-btn, .remove-btn {
   background-color: #eace60;
   border: none;
   color: white;
@@ -62,26 +62,36 @@ h1 {
   font-size: 14px;
 }
 
-.add-btn:hover {
+.add-btn:hover, .remove-btn:hover {
   background-color: #ef9e25;
 }
 
-.cart-total {
-  font-size: 30px;
-  font-weight: bold;
-  color: #333;
-  margin: 20px;
-}
-
-.cart-total ol {
-  padding-left: 20px;
+.cart {
   margin-top: 10px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  border: 2px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
 }
 
-.cart-total li {
-  padding: 4px 0;
-  border-bottom: 1px solid #eee;
-  font-size: 20px;
-  color: rgb(59, 58, 58)
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 5px;
 }
+
+.cart-total {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}
+
+
 

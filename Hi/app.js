@@ -160,79 +160,87 @@ const dogs = [
   },
 ];
 
-const container = document.querySelector(".container");
-const filtersDiv = document.querySelector(".filters");
-const cartTotalDiv = document.querySelector(".cart-total");
-let cart = [];
-
 function inject(item) {
+  const container = document.querySelector(".container");
   const html = `
-    <div class="card" data-name="${item.name}" data-price="${item.price}">
+    <div class="card" data-name="${item.name}" data-img="${item.img}" data-alt="${item.alt}" data-price="${item.price}">
       <img class="card-img" src="${item.img}" alt="${item.alt}">
       <h2 class="card-name">${item.name}</h2>
       <p class="card-alt">${item.alt}</p>
       <p class="card-price">Price: $${item.price}</p>
       <button class="add-btn">Add to Cart</button>
-    </div>
-  `;
+    </div>`;
   container.insertAdjacentHTML("afterbegin", html);
 }
 
-function displayDogs(filter = "all") {
-  container.innerHTML = "";
+dogs.forEach((item) => inject(item));
 
-  let filtered;
-  if (filter === "all") filtered = dogs;
-  else if (filter === "under2000")
-    filtered = dogs.filter((d) => d.price < 2000);
-  else if (filter === "2000to2500")
-    filtered = dogs.filter((d) => d.price >= 2000 && d.price <= 2500);
-  else if (filter === "over2500") filtered = dogs.filter((d) => d.price > 2500);
-
-  filtered.forEach((d) => inject(d));
-  attachAddToCart();
-}
-
-function attachAddToCart() {
+function addToCart() {
   const buttons = document.querySelectorAll(".add-btn");
   buttons.forEach((btn) => {
-    btn.addEventListener("click", (event) => {
+    btn.addEventListener("click", function (event) {
+      const cart = document.querySelector(".cart");
       const card = event.target.closest(".card");
       const name = card.getAttribute("data-name");
-      const price = parseInt(card.getAttribute("data-price"));
-      cart.push({ name, price });
-      updateCartDisplay();
+      const price = card.getAttribute("data-price");
+
+      const html = `
+        <div class="cart-item" data-price="${price}">
+          ${name} : $${price} 
+          <button class="remove-btn">Remove</button>
+        </div>`;
+      cart.insertAdjacentHTML("afterbegin", html);
+
+      insideCart();
+      RemoveButtons();
     });
   });
 }
 
-function updateCartDisplay() {
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
-  const itemsList = cart
-    .map((item) => `<li>${item.name} - $${item.price}</li>`)
-    .join("");
-  cartTotalDiv.innerHTML = `
-    <strong>Cart Total: $${total}</strong>
-    <ol>${itemsList}</ol>
-  `;
-}
+addToCart();
 
-function createFilterButtons() {
-  const priceFilters = [
-    { name: "All", value: "all" },
-    { name: "Under $2000", value: "under2000" },
-    { name: "$2000 - $2500", value: "2000to2500" },
-    { name: "Over $2500", value: "over2500" },
-  ];
-
-  priceFilters.forEach((filter) => {
-    const btn = document.createElement("button");
-    btn.textContent = filter.name;
-    btn.addEventListener("click", () => displayDogs(filter.value));
-    filtersDiv.appendChild(btn);
+function RemoveButtons() {
+  const removeButtons = document.querySelectorAll(".remove-btn");
+  removeButtons.forEach((btn) => {
+    btn.onclick = function (event) {
+      event.target.parentElement.remove();
+      insideCart();
+    };
   });
 }
 
-createFilterButtons();
-displayDogs();
-updateCartDisplay();
+function filter(type) {
+  const container = document.querySelector(".container");
+  document.querySelectorAll(".card").forEach((card) => card.remove());
+
+  dogs.forEach((dog) => {
+    if (type === "all") inject(dog);
+    if (type === "low" && dog.price < 2000) inject(dog);
+    if (type === "mid" && dog.price >= 2000 && dog.price <= 2500) inject(dog);
+    if (type === "high" && dog.price > 2500) inject(dog);
+  });
+
+  addToCart();
+}
+
+function showFilter() {
+  const buttons = document.querySelectorAll(".filter button");
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () =>
+      filter(btn.getAttribute("data-filter"))
+    );
+  });
+}
+
+showFilter();
+
+function insideCart() {
+  const cart = document.querySelector(".cart");
+  document.querySelectorAll(".cart-total").forEach((old) => old.remove());
+  let cartTotal = 0;
+  document.querySelectorAll(".cart-item").forEach((item) => {
+    cartTotal += +item.getAttribute("data-price");
+  });
+  const html = `<div class="cart-total">Total: $${cartTotal}</div>`;
+  cart.insertAdjacentHTML("afterbegin", html);
+}
