@@ -193,3 +193,4 @@ addToCart();
 function removeAlbum(event) {
   event.target.parentElement.remove();
 }
+
