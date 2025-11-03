@@ -161,36 +161,85 @@ const dogs = [
 ];
 
 function inject(item) {
+  const container = document.querySelector(".container");
   const html = `
-    <div class="card" data-name="${item.name}" data-price="${item.price}">
+    <div class="card" data-name="${item.name}" data-img="${item.img}" data-alt="${item.alt}" data-price="${item.price}">
       <img class="card-img" src="${item.img}" alt="${item.alt}">
       <h2 class="card-name">${item.name}</h2>
       <p class="card-alt">${item.alt}</p>
       <p class="card-price">Price: $${item.price}</p>
       <button class="add-btn">Add to Cart</button>
-    </div>
-  `;
+    </div>`;
   container.insertAdjacentHTML("afterbegin", html);
 }
-dogs.forEach((item)) => 
+
+dogs.forEach((item) => inject(item));
 
 function addToCart() {
   const buttons = document.querySelectorAll(".add-btn");
-  const btnArray = Array.from(buttons);
-  btnArray.forEach((btn) =>
+  buttons.forEach((btn) => {
     btn.addEventListener("click", function (event) {
-      console.log(event, target, textContent);
-      console.log(
-        event.target.closest(".card").getAttribute("data-name"),
-        event.target.closest(".card").getAttribute("data-price")
-      );
-    })
-  );
+      const cart = document.querySelector(".cart");
+      const card = event.target.closest(".card");
+      const name = card.getAttribute("data-name");
+      const price = card.getAttribute("data-price");
+
+      const html = `
+        <div class="cart-item" data-price="${price}">
+          ${name} : $${price} 
+          <button class="remove-btn">Remove</button>
+        </div>`;
+      cart.insertAdjacentHTML("afterbegin", html);
+
+      insideCart();
+      RemoveButtons();
+    });
+  });
 }
 addToCart();
 
-
-function removeAlbum(event) {
-  event.target.parentElement.remove();
+function RemoveButtons() {
+  const removeButtons = document.querySelectorAll(".remove-btn");
+  removeButtons.forEach((btn) => {
+    btn.onclick = function (event) {
+      event.target.parentElement.remove();
+      insideCart();
+    };
+  });
 }
 
+function filter(type) {
+  const container = document.querySelector(".container");
+  document.querySelectorAll(".card").forEach((card) => card.remove());
+
+  dogs.forEach((dog) => {
+    if (type === "all") inject(dog);
+    if (type === "low" && dog.price < 2000) inject(dog);
+    if (type === "mid" && dog.price >= 2000 && dog.price <= 2500) inject(dog);
+    if (type === "high" && dog.price > 2500) inject(dog);
+  });
+
+  addToCart();
+}
+
+function showFilter() {
+  const buttons = document.querySelectorAll(".filter button");
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () =>
+      filter(btn.getAttribute("data-filter"))
+    );
+  });
+}
+
+showFilter();
+
+function insideCart() {
+  const cart = document.querySelector(".cart");
+  document.querySelectorAll(".cart-total").forEach((old) => old.remove());
+  let cartTotal = 0;
+  document.querySelectorAll(".cart-item").forEach((item) => {
+    cartTotal += +item.getAttribute("data-price");
+  });
+  const html = `<div class="cart-total">Total: $${cartTotal}</div>`;
+  cart.insertAdjacentHTML("afterbegin", html);
+}
