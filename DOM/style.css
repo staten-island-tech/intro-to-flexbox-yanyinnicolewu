@@ -11,7 +11,7 @@ h1 {
   color: black;
 }
 
-h3{
+h3 {
   text-align: center;
   font-size: 50px;
 }
@@ -52,7 +52,8 @@ h3{
   color: #000;
 }
 
-.add-btn, .remove-btn {
+.add-btn,
+.remove-btn {
   background-color: #eace60;
   border: none;
   color: white;
@@ -62,7 +63,8 @@ h3{
   font-size: 14px;
 }
 
-.add-btn:hover, .remove-btn:hover {
+.add-btn:hover,
+.remove-btn:hover {
   background-color: #ef9e25;
 }
 
@@ -92,6 +94,3 @@ h3{
   margin-top: 10px;
   text-align: center;
 }
-
-
-

@@ -192,7 +192,6 @@ function addToCart() {
       cart.insertAdjacentHTML("afterbegin", html);
 
       insideCart();
-      RemoveButtons();
     });
   });
 }
