@@ -39,6 +39,10 @@ h3 {
   text-align: center;
 }
 
+.card:hover {
+  background-color: #f8f6f6;
+}
+
 .card-img {
   width: 200px;
   height: 150px;
@@ -52,8 +56,7 @@ h3 {
   color: #000;
 }
 
-.add-btn,
-.remove-btn {
+.button {
   background-color: #eace60;
   border: none;
   color: white;
@@ -63,8 +66,7 @@ h3 {
   font-size: 14px;
 }
 
-.add-btn:hover,
-.remove-btn:hover {
+.button:hover {
   background-color: #ef9e25;
 }
 

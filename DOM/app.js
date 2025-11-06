@@ -168,7 +168,7 @@ function inject(item) {
       <h2 class="card-name">${item.name}</h2>
       <p class="card-alt">${item.alt}</p>
       <p class="card-price">Price: $${item.price}</p>
-      <button class="add-btn">Add to Cart</button>
+      <button class="button">Add to Cart</button>
     </div>`;
   container.insertAdjacentHTML("afterbegin", html);
 }
@@ -176,46 +176,37 @@ function inject(item) {
 dogs.forEach((item) => inject(item));
 
 function addToCart() {
-  const buttons = document.querySelectorAll(".add-btn");
-  buttons.forEach((btn) => {
+  const buttons = document.querySelectorAll(".button");
+  buttons.forEach((btn) =>
     btn.addEventListener("click", function (event) {
-      const cart = document.querySelector(".cart");
       const card = event.target.closest(".card");
       const name = card.getAttribute("data-name");
       const price = card.getAttribute("data-price");
 
-      const html = `
-        <div class="cart-item" data-price="${price}">
-          ${name} : $${price} 
-          <button class="remove-btn">Remove</button>
-        </div>`;
+      const cart = document.querySelector(".cart");
+      const html = `<div class="cart-item" data-price="${price}">${name} : $${price}</div>`;
       cart.insertAdjacentHTML("afterbegin", html);
 
       insideCart();
-    });
-  });
+    })
+  );
 }
-addToCart();
 
-function RemoveButtons() {
-  const removeButtons = document.querySelectorAll(".remove-btn");
-  removeButtons.forEach((btn) => {
-    btn.onclick = function (event) {
-      event.target.parentElement.remove();
-      insideCart();
-    };
-  });
-}
+addToCart();
 
 function filter(type) {
   const container = document.querySelector(".container");
-  document.querySelectorAll(".card").forEach((card) => card.remove());
+  container.innerHTML = ""; // clear container first
 
-  dogs.forEach((dog) => {
-    if (type === "all") inject(dog);
-    if (type === "low" && dog.price < 2000) inject(dog);
-    if (type === "mid" && dog.price >= 2000 && dog.price <= 2500) inject(dog);
-    if (type === "high" && dog.price > 2500) inject(dog);
+  dogs.forEach(function (dog) {
+    if (
+      type === "all" ||
+      (type === "low" && dog.price < 2000) ||
+      (type === "mid" && dog.price >= 2000 && dog.price <= 2500) ||
+      (type === "high" && dog.price > 2500)
+    ) {
+      inject(dog);
+    }
   });
 
   addToCart();
@@ -223,10 +214,10 @@ function filter(type) {
 
 function showFilter() {
   const buttons = document.querySelectorAll(".filter button");
-  buttons.forEach((btn) => {
-    btn.addEventListener("click", () =>
-      filter(btn.getAttribute("data-filter"))
-    );
+  buttons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      filter(btn.getAttribute("data-filter"));
+    });
   });
 }
 
@@ -235,10 +226,13 @@ showFilter();
 function insideCart() {
   const cart = document.querySelector(".cart");
   document.querySelectorAll(".cart-total").forEach((old) => old.remove());
+  const cartItems = document.querySelectorAll(".cart-item");
+
   let cartTotal = 0;
-  document.querySelectorAll(".cart-item").forEach((item) => {
+  cartItems.forEach((item) => {
     cartTotal += +item.getAttribute("data-price");
   });
+
   const html = `<div class="cart-total">Total: $${cartTotal}</div>`;
   cart.insertAdjacentHTML("afterbegin", html);
 }
