@@ -196,7 +196,7 @@ addToCart();
 
 function filter(type) {
   const container = document.querySelector(".container");
-  container.innerHTML = ""; // clear container first
+  container.innerHTML = "";
 
   dogs.forEach(function (dog) {
     if (
