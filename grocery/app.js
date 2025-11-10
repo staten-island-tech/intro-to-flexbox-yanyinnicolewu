@@ -53,11 +53,15 @@
 // console.log(findDNS(dnsRecords, "nasa.com"));
 // console.log(findDNS(dnsRecords, "openai.com"));
 
+slots(48, 3, 10, 4);
+let n = 0;
 function slots(q, p1, p2, p3) {
-  let q = 48;
-  let p1 = 3;
-  let p2 = 10;
-  let p3 = 4;
-
-  while (p1 < 35) return;
+  while (q > 0) {
+    q--;
+    n++;
+    p1++;
+  }
+  if (q > 0) return n;
 }
+q;
+// Mason was here sb :)
