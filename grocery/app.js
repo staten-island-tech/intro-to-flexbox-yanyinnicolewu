@@ -62,6 +62,6 @@ function slots(q, p1, p2, p3) {
     p1++;
   }
   if (q > 0) return n;
+  console.log(a);
 }
 q;
-// Mason was here sb :)
