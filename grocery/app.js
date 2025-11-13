@@ -54,14 +54,30 @@
 // console.log(findDNS(dnsRecords, "openai.com"));
 
 slots(48, 3, 10, 4);
-let n = 0;
 function slots(q, p1, p2, p3) {
+  let plays = 0;
+  let currentmachines = 1;
   while (q > 0) {
     q--;
-    n++;
-    p1++;
+    if (currentmachines === 1);
+    {
+      q = q + 30;
+      p1++;
+      currentmachines === 1;
+    }
+    elseif(p2 > 1 === 100);
+    {
+      q = q + 60;
+      p2++;
+      currentmachines === 2;
+    }
+    elseif(p3 > 1 === 10);
+    {
+      q = q + 9;
+      p3++;
+      currentmachines === 3;
+    }
+    if (q > 0) return plays;
+    console.log(a);
   }
-  if (q > 0) return n;
-  console.log(a);
 }
-q;
