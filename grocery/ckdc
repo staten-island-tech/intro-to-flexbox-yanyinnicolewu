@@ -1,0 +1,59 @@
+Use a for loop to print numbers from 1 to 10.
+Use a while loop to count down from 20 to 1.
+Use filter to find numbers greater than 50 in an array.
+Write an arrow function that multiplies two numbers.
+
+// const numbers = [1,2,3,4,5,6,7,8,9,10];
+
+// function printAll(list) {
+//     for(let i = 0; i < list.length; i++) {
+//         console.log(list[i]);
+//     }
+// }
+// printAll(numbers);
+
+
+// let number = 1;
+
+// while (number > 0 && number <= 10) {
+//     console.log(number);
+//     number ++;
+// }
+// console.log("happy birthday");
+
+
+// let number = 20;
+
+// while (number > 0) {
+//   console.log(number);
+//   number--;
+// }
+// console.log("ready to go");
+
+// let x = 5;
+// let y = 6;
+
+// function multiple (x,y){
+//     console.log(x * y);
+// }
+
+// multiple(x,y);
+
+
+// const multiple (x, y) => console.log(x*y);
+
+// let x = 5;
+// let y = 6;
+
+// let result = multiple (x, y);
+// console.log(result);
+
+
+
+// const numbers = [40,50,29,39,60,100];
+// const greatThan50 = numbers.filter((el) => el > 50 );
+// console.log(greaterThan50);
+
+
+
+

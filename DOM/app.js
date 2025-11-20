@@ -190,7 +190,7 @@ function addToCart() {
       insideCart();
     })
   );
-}
+}·
 
 addToCart();
 

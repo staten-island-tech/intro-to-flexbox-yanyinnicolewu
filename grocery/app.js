@@ -13,6 +13,20 @@
 //   return total;
 // }
 
+function total(cart) {
+  let toatl = 0;
+  cart.forEach((item) => {
+    let price = item.price;
+    if (price > 20) {
+      price = price * 0.9;
+    }
+    toatl = total + price * item.quantity;
+  });
+  if (total > 200) {
+    total = total * 0.9;
+  }
+  return total;
+}
 // const dnsRecords = [
 //   { address: "amazon.com", dns: "205.251.242.103" },
 //   { address: "apple.com", dns: "17.253.144.10" },
